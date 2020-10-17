@@ -5,7 +5,7 @@ const express = require('express');
 const authRoute = require('./routes/api/auth');
 // const profileRoute = require('./routes/api/profile');
 const path = require('path');
-
+require('dotenv').config();
 const app = express();
 app.use(express.json({extended : false}));
 // connectDB();
