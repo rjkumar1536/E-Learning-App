@@ -1,28 +1,48 @@
 const express = require('express');
-// const connectDB = require('./config/db');
-// const userRoute = require('./routes/api/users');
-// const postsRoute = require('./routes/api/posts');
-const authRoute = require('./routes/api/auth');
-// const profileRoute = require('./routes/api/profile');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const path = require('path');
-require('dotenv').config();
-const app = express();
-app.use(express.json({extended : false}));
-// connectDB();
-// app.use('/api/users', userRoute);
-app.use('/api/auth', authRoute);
-// app.use('/api/posts', postsRoute);
-// app.use('/api/profiles', profileRoute);
 
-// if(process.env.NODE_ENV == 'production'){
-//     app.use(express.static('./client/build'))
-//     app.get('*', (req, res)=>{
-//         res.sendFile(path.resolve(__dirname , "client", "build", "index.html"))
-//     })
-// }
+require('dotenv').config();
+
+const studentRouter = require('./routes/student');
+const parentRouter = require('./routes/parent');
+const teacherRouter = require('./routes/teacher');
+
+//app
+const app = express();
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, x-auth,x-xsrf-token')
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+    res.header('Access-Control-Allow-Credentials', true)
+    res.header('Access-Control-Expose-Headers', 'x-auth')
+    next()
+  })
+
+//db connnection
+mongoose.connect(process.env.DATABASE,{
+    useNewUrlParser: true,
+    useCreateIndex:true
+})
+.then(() => {console.log('db connected ')})
+
+//middlewares
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+//route
+app.use('/students',studentRouter);
+app.use('/parents',parentRouter);
+app.use('/teachers',teacherRouter);
 
 const PORT = process.env.PORT || 5000
-app.get('/', (req, res)=>{
+
+app.get('/status', (req, res)=>{
     res.send("I am listenning");
 })
-app.listen(PORT, ()=> console.log("App is listenning on port 5000"))
+app.listen(PORT, ()=> console.log("App is listenning on port "+ PORT))
