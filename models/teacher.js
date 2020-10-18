@@ -89,7 +89,7 @@ TeacherSchema.statics.findByCredentials=function(teacherId,password){
     var Teacher=this;
    return Teacher.findOne({teacherId}).then((teacher)=>{
         if(!teacher){
-            return Promise.reject(`No teacher found with registration id ${teacherId}`);
+            return Promise.reject({message : `No teacher found with registration id ${teacherId}`});
         }
 
         return new Promise((resolve,reject)=>{
