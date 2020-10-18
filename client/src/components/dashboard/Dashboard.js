@@ -4,9 +4,20 @@ import { Link , Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {setAlert} from '../../actions/action';
 import PropTypes from 'prop-types';
+import InfoCorner from './InfoCorner';
 
 const Dashboard = ()=>{
-    return (<h1>Construction in progress</h1>)
+    return (
+        <Fragment>
+            <div className = "dashboard">
+                <div className = "left__section">
+                </div>
+                <div className = "right__section">
+                    <InfoCorner></InfoCorner>
+                </div>
+            </div>
+        </Fragment>
+    )
 }
 
 export default connect()(Dashboard)

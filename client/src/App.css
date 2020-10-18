@@ -575,8 +575,88 @@
       padding: 0.3rem 0.4rem;
     }
   }
+.dashboard {
+  display: flex;
+  width: 80vw;
+  height: 80vh;
+  background-color: #f9fafb;
+}
 
-  /* input[type=radio]
-  {
-      display:none;
-  } */
+.left__section{
+  flex-basis: 65%;
+  height: 100%;
+  /* background-color:blue; */
+  margin: 10px;
+}
+
+.right__section{
+  flex-basis: 35%;
+  height: 100%;
+  background-color: #fff;
+  margin: 10px;
+}
+
+.latest__list{
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0,0, 0.3);
+  height: 100%;
+  /* padding: 2rem 3rem; */
+  border-radius: 2px;
+}
+.list__header{
+  background-color: #0077b5;
+  color : white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.news__style{
+  list-style-type:none;
+  color : var(--primary-color);
+  padding: 25px;
+  /* margin: 2px; */
+  cursor: pointer;
+}
+
+
+Here is a sample how you can do, and by setting the delay and duration you control the space between the texts
+
+.marquee {
+  background-color: #ddd;
+  width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee li {
+  display: inline-block;
+  font-size: 20px;
+  position: relative;
+  top: 100%;
+  animation: marquee 8s linear infinite;
+}
+.marquee:hover li {
+  animation-play-state: paused;
+}
+
+.marquee li:nth-child(1) {
+  animation-delay: 0s;
+}
+.marquee li:nth-child(2) {
+  animation-delay: 0.8s;
+}
+.marquee li:nth-child(3) {
+  animation-delay: 1.6s;
+}
+.marquee li:nth-child(4) {
+  animation-delay: 2.4s;
+}
+.marquee li:nth-child(5) {
+  animation-delay: 3.2s;
+}
+
+@keyframes marquee {
+  0%   { top: 100%; }
+  100% { top: -100%; }
+}
