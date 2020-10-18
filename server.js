@@ -36,9 +36,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //route
-app.use('/students',studentRouter);
-app.use('/parents',parentRouter);
-app.use('/teachers',teacherRouter);
+app.use('/api/students/',studentRouter);
+app.use('/api/parents/',parentRouter);
+app.use('/api/teachers/',teacherRouter);
 
 const PORT = process.env.PORT || 5000
 

@@ -37,24 +37,23 @@ exports.signup = (req,res) => {
 
 exports.login = (req,res) => {
     var body=_.pick(req.body,['studentId','password']);
+    console.log(body)
     Student.findByStudentId(body.studentId).then((student) => {
         Parent.findByCredentials(student.parentId,body.password).then((parent)=>{
             return parent.generateAuthToken().then((token)=>{
                 res.header('x-auth',token).send(parent);
             })
         }).catch((e)=>{
-            console.log(e)
-            let err=errorHandler(e);
-            res.status(400).json({
-                err
-            });
+            // let err=errorHandler(e);
+            console.log(e);
+            res.status(400).send(e);
         });
     }).catch((e)=>{
-        console.log(e)
-        let err=errorHandler(e);
-        res.status(400).json({
-            err
-        });
+        // let err=errorHandler(e);
+        res.status(400).send(e);
+        // res.status(400).json({
+        //     err
+        // });
     });
  };
 

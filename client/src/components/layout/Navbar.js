@@ -35,7 +35,7 @@ const guestLinks =
         <div>
             <nav className="navbar bg-dark">
                 <h1>
-                    <Link to="/"><i className="fas fa-book"></i> Home</Link>
+                    <Link to="/"><i className="fas fa-code"></i> Home</Link>
                 </h1>
                 {!loading && <Fragment>{( isAuthenticated ?authLinks: guestLinks)}</Fragment>}
             </nav>

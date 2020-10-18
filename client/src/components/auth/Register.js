@@ -13,8 +13,10 @@ const Register = ({setAlert, registerUser, isAuthenticated}) => {
         email : '',
         password : '',
         password2 : '',
-        regID : '',
-        regIDs : '',
+        studentId : '',
+        standard : '',
+        // regIDs : '',
+        teacherId : '',
         userType : 'Student'
     });
 
@@ -27,7 +29,7 @@ const Register = ({setAlert, registerUser, isAuthenticated}) => {
             setAlert("password don't match", 'danger');
         }
 
-        registerUser({name , email, password, userType, regID, regIDs});
+        registerUser({name , email, password, studentId,userType, standard, teacherId});
 
         
     //     const newUser = {
@@ -50,7 +52,7 @@ const Register = ({setAlert, registerUser, isAuthenticated}) => {
     //     }
     }
 
-    const {name, email , password, password2, userType, regID, regIDs} = formData;
+    const {name, email , password, password2, studentId, userType,  standard ,teacherId} = formData;
     if(isAuthenticated){
         return <Redirect to = "/dashboard"></Redirect>
     }
@@ -80,12 +82,22 @@ const Register = ({setAlert, registerUser, isAuthenticated}) => {
                 </div>
                 {
                     userType === "Student" && <div className="form-group">
-                    <input type="text" placeholder="Registration ID" name="regID" value = {regID} onChange = {(e)=>handleChange(e)}  />
+                    <input type="text" placeholder="Registration ID" name="studentId" value = {studentId} onChange = {(e)=>handleChange(e)}  />
+                    </div>
+                }
+                {
+                    userType === "Student" && <div className="form-group">
+                    <input type="text" placeholder="Class" name="standard" value = {standard} onChange = {(e)=>handleChange(e)}  />
                     </div>
                 }
                 {
                     userType === "Parent" && <div className="form-group">
-                    <input type="text" placeholder="Child Registration ID1,Child Registration ID2" name="regIDs" value = {regIDs} onChange = {(e)=>handleChange(e)}  />
+                    <input type="text" placeholder="Child Registration ID" name="studentId" value = {studentId} onChange = {(e)=>handleChange(e)}  />
+                    </div>
+                }
+                {
+                    userType === "Teacher" && <div className="form-group">
+                    <input type="text" placeholder="Teacher Id" name="teacherId" value = {teacherId} onChange = {(e)=>handleChange(e)}  />
                     </div>
                 }
                 <div className="form-group">

@@ -11,7 +11,8 @@ const initialState = {
 token : localStorage.getItem('token'),
 isAuthenticated : false,
 loading : true,
-user : null
+user : null,
+userType : localStorage.getItem('userType'),
 }
 
 const authReducer = (state = initialState, action)=>{
@@ -20,11 +21,13 @@ switch(type){
     case REGISTER_SUCCESS : 
     case LOGIN_SUCCESS :
         localStorage.setItem('token', payload.token)
+        localStorage.setItem('userType', payload.userType)
         return {...state , user : payload, isAuthenticated : true, loading : false  }
     case REGISTER_FAILED :
     case AUTH_FAILED :
     case LOGIN_FAILED :
          localStorage.removeItem('token');
+         localStorage.removeItem('userType');
         return {...state , token : null, isAuthenticated : false, loading : false  }
     case AUTH_SUCCESS :
         return {...state, user : payload,  isAuthenticated : true, loading : false}
@@ -33,8 +36,10 @@ switch(type){
     case LOGOUT :
     case DELETE_ACCOUNT :
         localStorage.removeItem('token');
+        localStorage.removeItem('userType');
         return {
             token : localStorage.getItem('token'),
+            userType : localStorage.getItem('userType'),
             isAuthenticated : false,
             loading : false,
             user : null

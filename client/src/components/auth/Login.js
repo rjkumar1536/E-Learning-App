@@ -10,7 +10,9 @@ const Login = ({loginUser, isAuthenticated}) => {
     const [formData , setData] = useState({
         email : '',
         password : '',
-        userType : "Student"
+        userType : "Student",
+        studentId : '',
+        teacherId : ''
     });
 
     const handleChange = (e)=>{
@@ -19,14 +21,14 @@ const Login = ({loginUser, isAuthenticated}) => {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        loginUser({email, password,userType});
+        loginUser({email, password,userType, studentId ,teacherId});
     }
      
     if(isAuthenticated){
         return <Redirect  to = "/dashboard"/>
     }
 
-    const {email , password, userType} = formData;
+    const {email , password, userType, studentId, teacherId} = formData;
     return (
         <div>
             <h1 className ="large text-primary">Sign In</h1>
@@ -48,15 +50,40 @@ const Login = ({loginUser, isAuthenticated}) => {
 
                     </div>
                 </div>
-                <div className ="form-group">
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                    name="email"
-                    value = {email}
-                    onChange = {(e)=> handleChange(e)}
-                />
-                </div>
+               {
+                    userType ===  "Student"  && <div className ="form-group">
+                                            <input
+                                                type="text"
+                                                placeholder="Registration ID"
+                                                name="studentId"
+                                                value = {studentId}
+                                                onChange = {(e)=> handleChange(e)}
+                                            />
+                    </div>
+                }
+                {
+                    userType ===  "Teacher" && <div className ="form-group">
+                                            <input
+                                                type="text"
+                                                placeholder="Registration ID"
+                                                name="teacherId"
+                                                value = {teacherId}
+                                                onChange = {(e)=> handleChange(e)}
+                                            />
+                    </div>
+                } 
+                {
+                    userType ===  "Parent" && <div className ="form-group">
+                                            <input
+                                                type="text"
+                                                placeholder="Child Registration ID"
+                                                name="studentId"
+                                                value = {studentId}
+                                                onChange = {(e)=> handleChange(e)}
+                                            />
+                    </div>
+                } 
+
                 <div className ="form-group">
                 <input
                     type="password"

@@ -6,6 +6,6 @@ const  {authenticate}=require('../middleware/teacher-auth');
 router.post('/signup', signup);
 router.post('/signin', login);
 router.get('/me', authenticate, teacher_detail);
-router.delete('/me/token', authenticate, logout)
+router.delete('/logout', authenticate, logout)
 
 module.exports = router;

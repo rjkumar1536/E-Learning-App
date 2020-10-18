@@ -5,7 +5,7 @@ const  {authenticate}=require('../middleware/student-auth');
 
 router.post('/signup', signup);
 router.post('/signin', login);
+router.delete('/logout', authenticate, logout)
 router.get('/me', authenticate, student_detail);
-router.delete('/me/token', authenticate, logout)
 
 module.exports = router;

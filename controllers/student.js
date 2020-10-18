@@ -20,13 +20,12 @@ exports.login = (req,res) => {
     var body=_.pick(req.body,['studentId','password']);
 
     Student.findByCredentials(body.studentId,body.password).then((student)=>{
-        console.log('student found...', student)
+        // console.log('student found...', student)
         return student.generateAuthToken().then((token)=>{
             
             res.header('x-auth',token).send(student);
         })
     }).catch((e)=>{
-        console.log(e)
         res.status(400).send(e);
     });
  };
